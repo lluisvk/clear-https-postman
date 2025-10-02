@@ -4,6 +4,8 @@ def find_urls(items):
     for item in items:
         request = item.get("request")
         if request and "url" in request:
+            if "protocol" in request["url"]:
+                del request["url"]["protocol"]
             raw = (request["url"]["raw"])
             if raw.startswith('http://{{host}}') or raw.startswith('http://localhost:8080') :
                 raw =raw.replace('http://{{host}}','{{host}}').replace('http://localhost:8080','{{host}}')
